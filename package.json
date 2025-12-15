@@ -9,7 +9,7 @@
         "preview": "cd frontend && vite preview",
         "server": "node backend/index.js",
         "start": "node backend/index.js",
-        "build-all": "npm install && cd frontend && vite build"
+        "build-all": "npm install --include=dev && cd frontend && vite build"
     },
     "dependencies": {
         "@google/generative-ai": "^0.24.1",
@@ -19,12 +19,12 @@
         "multer": "^1.4.5-lts.1",
         "pdf-parse": "^1.1.1",
         "react": "^18.3.1",
-        "react-dom": "^18.3.1"
+        "react-dom": "^18.3.1",
+        "@vitejs/plugin-react": "^4.3.1",
+        "vite": "^5.4.2"
     },
     "devDependencies": {
         "@types/react": "^18.3.3",
-        "@types/react-dom": "^18.3.0",
-        "@vitejs/plugin-react": "^4.3.1",
-        "vite": "^5.4.2"
+        "@types/react-dom": "^18.3.0"
     }
 }
