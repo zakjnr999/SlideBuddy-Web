@@ -1,51 +1,86 @@
 # SlideBuddy 🎓
 
-An intelligent web application that helps students study smarter by automatically generating summaries and practice questions from their lecture slides (PDF files) using Google Gemini AI.
+An intelligent AI-powered study platform that helps students learn smarter by automatically generating summaries and practice questions from lecture slides. Upload your PDFs, get instant AI analysis, and save your study history to the cloud!
 
-Your AI-powered study buddy for acing exams!
+**Live Demo:** https://slidebuddy-host.onrender.com
 
-## Features ✨
+## ✨ Features
 
-- 📄 **PDF Upload**: Drag-and-drop or click to upload lecture slides
-- 🤖 **AI-Powered Summaries**: Get concise summaries of your study materials
-- ❓ **Practice Questions**: Auto-generated Q&A to test your knowledge
-- 🎨 **Modern UI**: Beautiful, responsive design with smooth animations
-- 📋 **Easy Export**: Copy summaries and questions with one click
+### Core Features
+- 📄 **PDF Upload** - Drag-and-drop or click to upload lecture slides
+- 🤖 **AI-Powered Summaries** - Get concise summaries using Google Gemini AI
+- ❓ **Practice Questions** - Auto-generated Q&A to test your knowledge
+- 📋 **Easy Copy** - Copy summaries and questions with one click
 
-## Tech Stack 🛠️
+### User Features
+- 🔐 **User Authentication** - Secure signup/signin with JWT tokens
+- 💾 **Save History** - Auto-save every PDF to your account
+- 📚 **History Page** - View all your processed PDFs in one place
+- 🔍 **Detail View** - Click any saved item to see full summary & questions
+- 🗑️ **Manage History** - Delete individual items or clear all
 
-**Frontend:**
-- React 18 with Vite
-- Modern CSS with custom properties
-- Responsive design
+### Design
+- 🎨 **Modern UI** - Beautiful dark theme with purple gradients
+- 📱 **Fully Responsive** - Works perfectly on desktop, tablet, and mobile
+- ✨ **Smooth Animations** - Polished user experience
+- 🌐 **Multiple Pages** - Home, Features, About, History
 
-**Backend:**
-- Node.js + Express
-- Google Gemini AI API
-- PDF parsing with pdf-parse
-- File upload handling with Multer
+## 🛠️ Tech Stack
 
-## Setup Instructions 🚀
+### Frontend
+- **React 18** - Modern UI library
+- **Vite** - Lightning-fast build tool
+- **CSS3** - Custom styling with animations
+- **localStorage** - Client-side session persistence
+
+### Backend
+- **Node.js** - JavaScript runtime
+- **Express** - Web framework
+- **MongoDB Atlas** - Cloud database
+- **Mongoose** - MongoDB ODM
+- **JWT** - Secure authentication
+- **bcryptjs** - Password hashing
+- **Multer** - File upload handling
+- **pdf-parse** - PDF text extraction
+
+### AI
+- **Google Gemini 1.5 Flash** - Latest AI model for summaries & questions
+
+### Deployment
+- **Render** - Cloud hosting platform
+- **GitHub** - Version control & CI/CD
+
+## 🚀 Quick Start
 
 ### Prerequisites
 - Node.js (v16 or higher)
+- MongoDB Atlas account ([Sign up free](https://www.mongodb.com/cloud/atlas))
 - Google Gemini API Key ([Get one here](https://aistudio.google.com/app/apikey))
 
 ### Installation
 
-1. **Install dependencies:**
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/zakjnr999/SlideBuddy.git
+   cd SlideBuddy
+   ```
+
+2. **Install dependencies:**
    ```bash
    npm install
    ```
 
-2. **Set up environment variables:**
-   - Copy `.env.example` to `.env`
-   - Add your Gemini API key:
-     ```
-     GEMINI_API_KEY=your_actual_api_key_here
-     ```
+3. **Set up environment variables:**
+   
+   Create a `.env` file in the root directory:
+   ```env
+   GEMINI_API_KEY=your_gemini_api_key_here
+   MONGODB_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret_key
+   NODE_ENV=development
+   ```
 
-3. **Run the application:**
+4. **Run the application:**
 
    **Development mode (recommended):**
    ```bash
@@ -58,63 +93,131 @@ Your AI-powered study buddy for acing exams!
 
    Then open http://localhost:3000 in your browser
 
-4. **Production build:**
+5. **Production build:**
    ```bash
-   npm run build
-   npm run preview
+   npm run build-all
+   npm start
    ```
 
-## Deployment to Render 🌐
+## 📖 Usage
 
-1. **Create a new Web Service on Render**
-2. **Connect your GitHub repository**
-3. **Configure the service:**
-   - Build Command: `npm install`
-   - Start Command: `npm run server`
-4. **Add environment variable:**
-   - Key: `GEMINI_API_KEY`
-   - Value: Your Gemini API key
-5. **Deploy!**
+1. **Sign Up** - Create your account
+2. **Upload PDF** - Drag & drop your lecture slides
+3. **Get Results** - AI generates summary & practice questions
+4. **Auto-Save** - Results saved to your history automatically
+5. **View History** - Access all your saved PDFs anytime
+6. **Study Anywhere** - Login from any device to access your history
 
-## Usage 📖
-
-1. Open the application in your browser
-2. Upload a PDF file (lecture slides, notes, etc.)
-3. Click "Analyze with AI"
-4. View your AI-generated summary and practice questions
-5. Copy the content or upload a new PDF
-
-## Project Structure 📁
+## 📁 Project Structure
 
 ```
 slidebuddy/
-├── src/
-│   ├── components/
-│   │   ├── Header.jsx
-│   │   ├── FileUpload.jsx
-│   │   └── Results.jsx
-│   ├── App.jsx
-│   ├── main.jsx
-│   └── index.css
-├── server/
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Header.jsx
+│   │   │   ├── FileUpload.jsx
+│   │   │   ├── Results.jsx
+│   │   │   ├── Features.jsx
+│   │   │   ├── About.jsx
+│   │   │   ├── History.jsx
+│   │   │   └── Auth.jsx
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   └── dist/              # Production build
+├── backend/
+│   ├── models/
+│   │   ├── User.js
+│   │   └── History.js
+│   ├── routes/
+│   │   ├── auth.js
+│   │   └── history.js
+│   ├── middleware/
+│   │   └── auth.js
 │   └── index.js
-├── package.json
-└── vite.config.js
+├── docs/                  # Documentation
+├── scripts/               # Utility scripts
+└── package.json
 ```
 
-## API Endpoints 🔌
+## 🔌 API Endpoints
 
+### Authentication
+- `POST /api/auth/signup` - Create new account
+- `POST /api/auth/signin` - Login to account
+- `GET /api/auth/me` - Get current user
+
+### PDF Processing
 - `POST /api/process-pdf` - Upload and process PDF file
+
+### History
+- `GET /api/history` - Get user's history
+- `POST /api/history` - Save new item
+- `DELETE /api/history/:id` - Delete specific item
+- `DELETE /api/history` - Clear all history
+
+### Health
 - `GET /api/health` - Health check endpoint
 
-## Contributing 🤝
+## 🌐 Deployment
 
-Feel free to fork this project and make it your own!
+### Deploy to Render
 
-## License 📄
+1. **Fork/Clone this repository**
+2. **Create a new Web Service on Render**
+3. **Connect your GitHub repository**
+4. **Configure the service:**
+   - Build Command: `npm run build-all`
+   - Start Command: `npm start`
+5. **Add environment variables:**
+   - `GEMINI_API_KEY` - Your Gemini API key
+   - `MONGODB_URI` - Your MongoDB connection string
+   - `JWT_SECRET` - Your JWT secret key
+   - `NODE_ENV` - Set to `production`
+6. **Deploy!**
+
+Render will automatically redeploy when you push to the main branch.
+
+## 🔒 Security
+
+- ✅ Password hashing with bcrypt (10 salt rounds)
+- ✅ JWT token authentication (30-day expiration)
+- ✅ Protected API routes with middleware
+- ✅ HTTPS encryption (provided by Render)
+- ✅ Input validation and sanitization
+- ✅ Environment variables for secrets
+- ✅ CORS configuration
+
+## 📱 Mobile App (Coming Soon)
+
+Flutter mobile app in development with features:
+- 📸 Camera to PDF scanning
+- 📴 Offline mode
+- 🔔 Study reminders
+- 📊 Progress tracking
+
+Expected release: January 20, 2026
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to:
+- Fork the repository
+- Create a feature branch
+- Submit a pull request
+
+## 📄 License
 
 MIT License - feel free to use this for your studies!
 
+## 🙏 Acknowledgments
+
+- Google Gemini AI for powerful language models
+- MongoDB Atlas for cloud database
+- Render for hosting
+- All students who need better study tools!
+
 ---
 
-Built with ❤️ for students everywhere
+**Built with ❤️ for students everywhere**
+
+*Transform your study materials with AI - Upload, Analyze, Learn!*
