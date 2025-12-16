@@ -1,8 +1,16 @@
+import { useState } from 'react'
 import './Header.css'
 
 function Header({ currentPage, setCurrentPage, user, onShowAuth, onLogout, theme, onToggleTheme }) {
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
     const handleNavClick = (page) => {
         setCurrentPage(page)
+        setMobileMenuOpen(false) // Close menu after navigation
+    }
+
+    const toggleMobileMenu = () => {
+        setMobileMenuOpen(!mobileMenuOpen)
     }
 
     return (
@@ -23,7 +31,8 @@ function Header({ currentPage, setCurrentPage, user, onShowAuth, onLogout, theme
                     <span className="logo-text">SlideBuddy</span>
                 </div>
 
-                <nav className="nav">
+                {/* Desktop Navigation */}
+                <nav className="nav desktop-nav">
                     <button
                         onClick={() => handleNavClick('features')}
                         className={`nav-link ${currentPage === 'features' ? 'active' : ''}`}
@@ -71,7 +80,68 @@ function Header({ currentPage, setCurrentPage, user, onShowAuth, onLogout, theme
                         </button>
                     )}
                 </nav>
+
+                {/* Mobile Menu Button */}
+                <button className="mobile-menu-btn" onClick={toggleMobileMenu} aria-label="Toggle menu">
+                    {mobileMenuOpen ? (
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    ) : (
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    )}
+                </button>
             </div>
+
+            {/* Mobile Dropdown Menu */}
+            {mobileMenuOpen && (
+                <div className="mobile-menu">
+                    <button
+                        onClick={() => handleNavClick('features')}
+                        className={`mobile-nav-link ${currentPage === 'features' ? 'active' : ''}`}
+                    >
+                        Features
+                    </button>
+                    <button
+                        onClick={() => handleNavClick('about')}
+                        className={`mobile-nav-link ${currentPage === 'about' ? 'active' : ''}`}
+                    >
+                        About
+                    </button>
+
+                    {user && (
+                        <button
+                            onClick={() => handleNavClick('history')}
+                            className={`mobile-nav-link ${currentPage === 'history' ? 'active' : ''}`}
+                        >
+                            History
+                        </button>
+                    )}
+
+                    <div className="mobile-menu-divider"></div>
+
+                    <button onClick={onToggleTheme} className="mobile-nav-link">
+                        {theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode'}
+                    </button>
+
+                    {user ? (
+                        <>
+                            <div className="mobile-user-info">
+                                👋 {user.name}
+                            </div>
+                            <button onClick={() => { onLogout(); setMobileMenuOpen(false); }} className="mobile-nav-link logout">
+                                Logout
+                            </button>
+                        </>
+                    ) : (
+                        <button onClick={() => { onShowAuth(); setMobileMenuOpen(false); }} className="mobile-nav-link signin">
+                            Sign In
+                        </button>
+                    )}
+                </div>
+            )}
         </header>
     )
 }
