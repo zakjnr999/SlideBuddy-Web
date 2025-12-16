@@ -24,7 +24,6 @@ const historySchema = new mongoose.Schema({
     }
 });
 
-// Index for faster queries
 historySchema.index({ userId: 1, processedAt: -1 });
 
 const History = mongoose.model('History', historySchema);

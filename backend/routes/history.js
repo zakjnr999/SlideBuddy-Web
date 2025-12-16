@@ -4,17 +4,13 @@ import { protect } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// All routes are protected
 router.use(protect);
 
-// @route   GET /api/history
-// @desc    Get user's history
-// @access  Private
 router.get('/', async (req, res) => {
     try {
         const history = await History.find({ userId: req.user._id })
             .sort({ processedAt: -1 })
-            .limit(100); // Limit to last 100 items
+            .limit(100);
 
         res.json({
             history
@@ -27,9 +23,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// @route   POST /api/history
-// @desc    Save new history item
-// @access  Private
 router.post('/', async (req, res) => {
     try {
         const { filename, summary, questions } = req.body;
@@ -58,9 +51,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-// @route   DELETE /api/history/:id
-// @desc    Delete history item
-// @access  Private
 router.delete('/:id', async (req, res) => {
     try {
         const historyItem = await History.findById(req.params.id);
@@ -71,7 +61,6 @@ router.delete('/:id', async (req, res) => {
             });
         }
 
-        // Make sure user owns this history item
         if (historyItem.userId.toString() !== req.user._id.toString()) {
             return res.status(403).json({
                 error: 'Not authorized to delete this item'
@@ -91,9 +80,6 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-// @route   DELETE /api/history
-// @desc    Clear all history
-// @access  Private
 router.delete('/', async (req, res) => {
     try {
         await History.deleteMany({ userId: req.user._id });
