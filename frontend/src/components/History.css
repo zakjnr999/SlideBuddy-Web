@@ -1,7 +1,7 @@
 .history-page {
     min-height: 100vh;
     padding: 100px 20px 60px;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    background: var(--background);
 }
 
 .history-container {
@@ -176,8 +176,8 @@
 }
 
 .history-modal {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: 20px;
     padding: 40px;
     max-width: 800px;
