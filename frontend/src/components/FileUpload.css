@@ -153,3 +153,40 @@
         font-size: 1.25rem;
     }
 }
+
+@media (max-width: 640px) {
+    .file-upload-container {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .upload-zone {
+        padding: 2rem 1rem;
+    }
+
+    .upload-title {
+        font-size: 1.1rem;
+    }
+
+    .upload-subtitle {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .upload-zone {
+        padding: 1.5rem 1rem;
+    }
+
+    .upload-title {
+        font-size: 1rem;
+    }
+
+    .upload-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .upload-hint {
+        font-size: 0.8rem;
+    }
+}
