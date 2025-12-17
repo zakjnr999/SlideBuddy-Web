@@ -100,10 +100,6 @@ function About() {
                                 <p>Node.js</p>
                             </div>
                             <div className="tech-item">
-                                <span>🤖</span>
-                                <p>Google Gemini AI</p>
-                            </div>
-                            <div className="tech-item">
                                 <span>📄</span>
                                 <p>PDF Processing</p>
                             </div>

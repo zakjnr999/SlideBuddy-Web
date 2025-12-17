@@ -171,7 +171,7 @@ function App() {
             />
 
             <footer className="footer">
-                <p>Built with ❤️ for students | Powered by Google Gemini AI</p>
+                <p>Built with ❤️ for students</p>
             </footer>
         </div>
     )
